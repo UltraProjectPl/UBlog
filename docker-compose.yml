@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    container_name: blog-web
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8
+    container_name: blog-mysql
+    ports:
+      - 3306:3306
+    command: ['--default-authentication-plugin=mysql_native_password']
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=blog
+      - MYSQL_USER=blog
+      - MYSQL_PASSWORD=root
