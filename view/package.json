@@ -1,6 +1,5 @@
 {
-  "name": "view",
-  "version": "0.1.0",
+  "name": "blog-view",
   "private": true,
   "dependencies": {
     "@types/jest": "24.0.19",
