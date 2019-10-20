@@ -1,4 +1,4 @@
-FROM php:7.3-apache
+FROM php:7.3-apache as api
 
 RUN apt-get update -yqq && \
   apt-get install -yqq --no-install-recommends \
@@ -16,13 +16,10 @@ RUN a2dissite 000-default && a2ensite blog
 
 RUN usermod -u 1000 www-data
 
-FROM mhart/alpine-node:11 AS builder
-WORKDIR /app
-COPY . .
-RUN yarn run build
+FROM node:12.11.0 as view
 
-FROM mhart/alpine-node
-RUN yarn global add serve
-WORKDIR /app
-COPY --from=builder /app/build .
-CMD ["serve", "-p", "80", "-s", "."]
+WORKDIR /var/www/html/view
+
+EXPOSE 3000
+
+CMD [ "yarn", "run", "start" ]
