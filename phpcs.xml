@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+    <rule ref="PSR2"/>
+
+    <file>src/</file>
+
+    <exclude-pattern>src/Migrations/*</exclude-pattern>
+
+    <arg name="cache" value=".phpcs-cache"/>
+    <arg name="encoding" value="utf-8"/>
+    <arg name="report" value="full"/>
+    <arg name="report-width" value="120"/>
+    <arg name="colors"/>
+    <arg value="p"/>
+</ruleset>
