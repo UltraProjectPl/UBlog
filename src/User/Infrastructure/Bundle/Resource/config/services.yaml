@@ -1,0 +1,3 @@
+App\User\Infrastructure\Bundle\Controller\:
+  resource: '../../Controller'
+  tags: ['controller.service_arguments']
