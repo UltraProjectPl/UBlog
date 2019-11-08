@@ -270,9 +270,6 @@
     "ralouphie/getallheaders": {
         "version": "3.0.3"
     },
-    "ramsey/uuid": {
-        "version": "3.8.0"
-    },
     "sebastian/code-unit-reverse-lookup": {
         "version": "1.0.1"
     },
@@ -416,6 +413,18 @@
     "symfony/inflector": {
         "version": "v4.3.5"
     },
+    "symfony/messenger": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "8a2675c061737658bed85102e9241c752620e575"
+        },
+        "files": [
+            "config/packages/messenger.yaml"
+        ]
+    },
     "symfony/mime": {
         "version": "v4.3.5"
     },
@@ -478,6 +487,9 @@
     },
     "symfony/security-http": {
         "version": "v4.3.5"
+    },
+    "symfony/serializer": {
+        "version": "v4.3.6"
     },
     "symfony/service-contracts": {
         "version": "v1.1.7"
