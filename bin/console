@@ -14,7 +14,7 @@ set_time_limit(0);
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
-if (!class_exists(Application::class)) {
+if (false === class_exists(Application::class)) {
     throw new RuntimeException('You need to add "symfony/framework-bundle" as a Composer dependency.');
 }
 
@@ -32,7 +32,7 @@ require dirname(__DIR__).'/config/bootstrap.php';
 if ($_SERVER['APP_DEBUG']) {
     umask(0000);
 
-    if (class_exists(Debug::class)) {
+    if (true === class_exists(Debug::class)) {
         Debug::enable();
     }
 }

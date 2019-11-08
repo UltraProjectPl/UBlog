@@ -16,6 +16,7 @@ RUN a2enmod rewrite
 RUN a2dissite 000-default && a2ensite blog
 
 RUN usermod -u 1000 www-data
+RUN chown www-data /var/www
 
 FROM node:12.11.0 as view
 

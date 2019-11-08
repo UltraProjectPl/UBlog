@@ -1,0 +1,16 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\UserInterface: auto
+    providers:
+        in_memory: { memory: null }
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        api:
+            pattern: ^/api/v1/
+            guard:
+                authenticators:
+                    - App\User\Infrastructure\Bundle\Security\ApiAuthenticator
+    access_control:
+        - { path: ^/auth/(login), roles: IS_AUTHENTICATED_ANONYMOUSLY }
