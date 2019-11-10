@@ -5,6 +5,7 @@
         "php": "^7.3.10",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "ramsey/uuid": "^3.8",
         "symfony/console": "4.3.*",
         "symfony/dotenv": "4.3.*",
@@ -19,9 +20,10 @@
     },
     "require-dev": {
         "codeception/codeception": "^3.1",
-        "squizlabs/php_codesniffer": "^3.5",
         "phpstan/phpstan": "^0.11.18",
-        "phpstan/phpstan-doctrine": "^0.11.6"
+        "phpstan/phpstan-doctrine": "^0.11.6",
+        "squizlabs/php_codesniffer": "^3.5",
+        "symfony/var-dumper": "4.3.*"
     },
     "config": {
         "preferred-install": {
