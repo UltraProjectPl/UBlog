@@ -6,7 +6,35 @@
     <services>
         <prototype
                 namespace="App\SharedKernel\Application\"
-                resource="../../../../Application/{Command,Notification,Query}/*Handler.php"
+                resource="../../../../Application/*"
         />
+
+        <prototype namespace="App\SharedKernel\Infrastructure\Bundle\"
+                   resource="../../*"
+                   exclude="../../{DependencyInjection,Resources}/*"
+        />
+
+        <prototype namespace="App\SharedKernel\UserInterface\"
+                   resource="../../../../UserInterface/*"
+                   exclude="../../../../UserInterface/{Controller}/*"
+        />
+
+        <service id="App\SharedKernel\UserInterface\Http\ResponseFactoryInterface"
+                 alias="App\SharedKernel\Infrastructure\Bundle\Http\ResponseFactory" />
+
+        <service id="App\SharedKernel\Infrastructure\Bundle\Form\FormHandlerFactory" autowire="true" />
+        <service id="App\SharedKernel\Application\Form\FormHandlerFactoryInterface"
+                 alias="App\SharedKernel\Infrastructure\Bundle\Form\FormHandlerFactory" />
+
+        <service id="App\SharedKernel\Application\Bus\CommandBusInterface"
+                 alias="App\SharedKernel\Infrastructure\Bundle\Messenger\CommandBus" />
+
+        <service id="App\SharedKernel\Application\Bus\QueryBusInterface"
+                 alias="App\SharedKernel\Infrastructure\Bundle\Messenger\QueryBus" />
+
+        <service id="app.request_listener"
+                 class="App\SharedKernel\Infrastructure\Bundle\KernelEventListener\RequestListener">
+            <tag name="kernel.event_listener" event="kernel.request" />
+        </service>
     </services>
 </container>
