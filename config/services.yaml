@@ -5,13 +5,3 @@ services:
         autowire: true
         autoconfigure: true
         public: false
-
-    App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
-
-
-    App\SharedKernel\Application\Bus\CommandBus: '@App\SharedKernel\Infrastructure\Bundle\Messenger\CommandBus'
-    App\SharedKernel\Application\Bus\EventBus: '@App\SharedKernel\Infrastructure\Bundle\Messenger\EventBus'
-    App\SharedKernel\Application\Bus\NotificationBus: '@App\SharedKernel\Infrastructure\Bundle\Messenger\NotificationBus'
-    App\SharedKernel\Application\Bus\QueryBus: '@App\SharedKernel\Infrastructure\Bundle\Messenger\QueryBus'
