@@ -1,0 +1,3 @@
+security:
+    resource: "routes/user/security.yaml"
+    prefix: /auth
