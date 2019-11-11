@@ -1,5 +1,5 @@
-// import * as React from 'react';
-//
-// export const Register: React.FC = () => {
-//     return ;
-// };
+import * as React from 'react';
+
+export const Register: React.FC = () => {
+    return <div></div>;
+};
