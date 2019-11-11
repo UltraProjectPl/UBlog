@@ -20,4 +20,12 @@ final class Users extends ServiceEntityRepository implements DomainUsers
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush($user);
     }
+
+    public function findOneByEmail(string $email): ?User
+    {
+        /** @var User|null $user */
+        $user = $this->findOneBy(['email' => $email]);
+
+        return $user;
+    }
 }
