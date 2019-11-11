@@ -42,7 +42,7 @@ export const Register: React.FC = () => {
                         name="password"
                         placeholder="Password:"
                         onChange={formik.handleChange}
-                        value={formik.values.email}
+                        value={formik.values.password}
                     />
                 </div>
                 <button type="submit">Submit</button>
