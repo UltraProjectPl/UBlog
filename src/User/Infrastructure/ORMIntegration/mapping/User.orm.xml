@@ -10,6 +10,6 @@
         </id>
         <field name="email" />
         <field name="password" />
-        <field name="token" />
+        <field name="token" nullable="true" />
     </entity>
 </doctrine-mapping>

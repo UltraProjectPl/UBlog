@@ -23,20 +23,18 @@ final class User
     private $password;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $token;
+    private $token = null;
 
     public function __construct(
         UuidInterface $id,
         string $email,
-        string $password,
-        string $token
+        string $password
     ) {
         $this->id = $id;
         $this->email = $email;
         $this->password = $password;
-        $this->token = $token;
     }
 
     public function getId(): UuidInterface
@@ -54,7 +52,7 @@ final class User
         return $this->password;
     }
 
-    public function getToken(): string
+    public function getToken(): ?string
     {
         return $this->token;
     }

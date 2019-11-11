@@ -33,8 +33,7 @@ final class CreateUserHandler implements CommandHandlerInterface
         $user = new User(
             Uuid::uuid4(),
             $command->getEmail(),
-            $command->getPassword(),
-            uniqid()
+            $command->getPassword()
         );
 
         $this->users->add($user);
