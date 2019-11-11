@@ -1,9 +1,12 @@
-import { ApplicationState, createRootReducer } from './index';
-import { applyMiddleware, compose, createStore } from 'redux';
+import { ApplicationAction, ApplicationState, createRootReducer } from './index';
+import { applyMiddleware, compose, createStore, Store } from 'redux';
+import thunk, { ThunkMiddleware } from 'redux-thunk';
 
 export default (initialState: Partial<ApplicationState> = {}) =>
     createStore(
-        createRootReducer,
+        createRootReducer(),
         initialState,
-        compose(applyMiddleware())
-    );
+        compose(applyMiddleware(
+            thunk as ThunkMiddleware<ApplicationState, ApplicationAction>
+        ))
+    ) as Store<ApplicationState>;

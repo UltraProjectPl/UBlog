@@ -2,7 +2,7 @@ import { AuthenticationActionTypes, AuthenticationState, RegisterState } from '.
 import { Reducer } from 'redux';
 import { AuthenticationActions } from './actions';
 
-const initalState: AuthenticationState = {
+const initialState: AuthenticationState = {
     email: '',
     password: ''
 };
@@ -10,7 +10,7 @@ const initalState: AuthenticationState = {
 export const authenticationReducer: Reducer<
     AuthenticationState,
     AuthenticationActions
-> = (state = initalState, action) => {
+> = (state = initialState, action) => {
     switch (action.type) {
         case AuthenticationActionTypes.REGISTER: {
             return {
@@ -18,7 +18,8 @@ export const authenticationReducer: Reducer<
                 password: ''
             }
         }
-        default:
+        default: {
             return state
+        }
     }
 };
