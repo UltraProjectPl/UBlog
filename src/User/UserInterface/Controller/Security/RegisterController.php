@@ -60,8 +60,8 @@ final class RegisterController
             $dto = $formHandler->getData();
 
             $this->commandBus->dispatch($dto->toCommand());
-            return new JsonResponse($dto);
 
+            /** @var User $user */
             $user = $this->queryBus->query(new UserByEmail($dto->email));
 
             if (false === $user instanceof User) {
@@ -70,9 +70,11 @@ final class RegisterController
                 );
             }
 
-            return $this->responseFactory->create('Done!');
+            return $this->responseFactory->create([
+                'email' => $user->getEmail()
+            ]);
         }
 
-        return $this->responseFactory->error('Failed!');
+        return $this->responseFactory->error('Failed');
     }
 }

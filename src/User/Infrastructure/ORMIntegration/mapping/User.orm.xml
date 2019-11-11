@@ -8,7 +8,7 @@
         <id name="id" type="uuid" >
             <generator strategy="NONE" />
         </id>
-        <field name="email" />
+        <field name="email" unique="true" />
         <field name="password" />
         <field name="token" nullable="true" />
     </entity>

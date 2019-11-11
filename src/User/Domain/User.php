@@ -34,7 +34,7 @@ final class User
     ) {
         $this->id = $id;
         $this->email = $email;
-        $this->password = $password;
+        $this->changePassword($password);
     }
 
     public function getId(): UuidInterface
@@ -55,5 +55,15 @@ final class User
     public function getToken(): ?string
     {
         return $this->token;
+    }
+
+    public function changePassword(string $password): void
+    {
+        $this->password = password_hash($password, PASSWORD_BCRYPT);
+    }
+
+    public function verifyPassword(string $hashedString): bool
+    {
+        return password_verify($this->password, $hashedString);
     }
 }

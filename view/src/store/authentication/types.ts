@@ -1,0 +1,20 @@
+import * as Yup from 'yup';
+
+export enum AuthenticationActionTypes {
+    REGISTER = '@@authentication/REGISTER'
+}
+
+export interface AuthenticationState {
+    email: string
+    password: string
+}
+
+export interface RegisterState {
+    email: string
+    password: string
+}
+
+export const RegisterSchema = Yup.object().shape({
+    email: Yup.string().email().required(),
+    password: Yup.string().min(5).max(255).required(),
+});
