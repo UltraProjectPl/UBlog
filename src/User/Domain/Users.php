@@ -5,5 +5,5 @@ namespace App\User\Domain;
 
 interface Users
 {
-
+    public function add(User $user): void;
 }

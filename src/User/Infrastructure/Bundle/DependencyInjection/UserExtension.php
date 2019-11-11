@@ -18,5 +18,6 @@ final class UserExtension extends Extension
         );
 
         $loader->load('services.xml');
+        $loader->load('doctrine.xml');
     }
 }

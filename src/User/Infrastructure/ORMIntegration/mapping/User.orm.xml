@@ -5,8 +5,11 @@
         https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd"
 >
     <entity name="App\User\Domain\User">
-        <id name="id" type="string">
-            <generator />
+        <id name="id" type="uuid" >
+            <generator strategy="NONE" />
         </id>
+        <field name="email" />
+        <field name="password" />
+        <field name="token" nullable="true" />
     </entity>
 </doctrine-mapping>

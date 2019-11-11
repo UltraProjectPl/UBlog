@@ -16,10 +16,21 @@ final class SharedKernelExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $container->registerForAutoconfiguration(CommandHandlerInterface::class)->addTag('messenger.message_handler');
-        $container->registerForAutoconfiguration(QueryHandlerInterface::class)->addTag('messenger.message_handler');
-        $container->registerForAutoconfiguration(NotificationHandlerInterface::class)->addTag('messenger.message_handler');
-        $container->registerForAutoconfiguration(EventSubscriberInterface::class)->addTag('messenger.message_handler');
+        $container
+            ->registerForAutoconfiguration(CommandHandlerInterface::class)
+            ->addTag('messenger.message_handler');
+
+        $container
+            ->registerForAutoconfiguration(QueryHandlerInterface::class)
+            ->addTag('messenger.message_handler');
+
+        $container
+            ->registerForAutoconfiguration(NotificationHandlerInterface::class)
+            ->addTag('messenger.message_handler');
+
+        $container
+            ->registerForAutoconfiguration(EventSubscriberInterface::class)
+            ->addTag('messenger.message_handler');
 
         $loader = new XmlFileLoader(
             $container,

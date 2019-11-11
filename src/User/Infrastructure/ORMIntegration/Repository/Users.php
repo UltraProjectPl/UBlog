@@ -14,4 +14,10 @@ final class Users extends ServiceEntityRepository implements DomainUsers
     {
         parent::__construct($registry, User::class);
     }
+
+    public function add(User $user): void
+    {
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush($user);
+    }
 }
