@@ -32,6 +32,9 @@
         <service id="App\SharedKernel\Application\Bus\QueryBusInterface"
                  alias="App\SharedKernel\Infrastructure\Bundle\Messenger\QueryBus" />
 
+        <service id="App\SharedKernel\Application\Bus\EventBusInterface"
+                 alias="App\SharedKernel\Infrastructure\Bundle\Messenger\EventBus" />
+
         <service id="app.request_listener"
                  class="App\SharedKernel\Infrastructure\Bundle\KernelEventListener\RequestListener">
             <tag name="kernel.event_listener" event="kernel.request" />
