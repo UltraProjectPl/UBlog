@@ -60,7 +60,6 @@ final class RegisterController
             $dto = $formHandler->getData();
 
             $this->commandBus->dispatch($dto->toCommand());
-            return new JsonResponse($dto);
 
             $user = $this->queryBus->query(new UserByEmail($dto->email));
 
