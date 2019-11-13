@@ -1,10 +1,11 @@
-import { AuthenticationActionTypes, AuthenticationState, RegisterState } from './types';
+import { AuthenticationActionTypes, AuthenticationState } from './types';
 import { Reducer } from 'redux';
 import { AuthenticationActions } from './actions';
 
 const initialState: AuthenticationState = {
     email: '',
-    password: ''
+    password: '',
+    token: ''
 };
 
 export const authenticationReducer: Reducer<
@@ -13,10 +14,18 @@ export const authenticationReducer: Reducer<
 > = (state = initialState, action) => {
     switch (action.type) {
         case AuthenticationActionTypes.REGISTER: {
-            return {
+            return Object.assign({}, state, {
                 email: '',
-                password: ''
-            }
+                password: '',
+                token: ''
+            })
+        }
+        case AuthenticationActionTypes.SECURITY: {
+            return Object.assign({}, state, {
+                email: '',
+                password: '',
+                token: ''
+            })
         }
         default: {
             return state
