@@ -1,0 +1,59 @@
+import * as React from 'react';
+import { useState } from 'react';
+import { useDispatch } from '../../hooks/useDispatch';
+import { useFormik } from 'formik';
+import { AuthenticationActions } from '../../store/authentication/actions';
+import { RegisterSchema, SecuritySchema } from '../../store/authentication/types';
+import { useTranslation } from 'react-i18next';
+
+export const Security: React.FC = () => {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+
+    const dispatch = useDispatch();
+    const { t } = useTranslation();
+
+
+    const formik = useFormik({
+        initialValues: {
+            email,
+            password
+        },
+        validationSchema: SecuritySchema,
+        onSubmit: values => {
+            dispatch(AuthenticationActions.security(values))
+        }
+    });
+
+    return (
+        <div>
+            <form onSubmit={formik.handleSubmit}>
+                <div>
+                    <label htmlFor="email">{t('email')}:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder={t('email') + '...'}
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                    />
+                    {formik.errors.email}
+                </div>
+                <div>
+                    <label htmlFor="password">{t('password')}:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder={t('password') + '...'}
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                    />
+                    {formik.errors.password}
+                </div>
+                <button type="submit">{t('security.submit')}</button>
+            </form>
+        </div>
+    );
+};
