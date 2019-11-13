@@ -4,12 +4,14 @@ import { useDispatch } from '../../hooks/useDispatch';
 import { useFormik } from 'formik';
 import { AuthenticationActions } from '../../store/authentication/actions';
 import { RegisterSchema } from '../../store/authentication/types';
+import { useTranslation } from 'react-i18next';
 
 export const Register: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
 
     const formik = useFormik({
@@ -27,30 +29,30 @@ export const Register: React.FC = () => {
         <div>
             <form onSubmit={formik.handleSubmit}>
                 <div>
-                    <label htmlFor="email">Email:</label>
+                    <label htmlFor="email">{t('email')}:</label>
                     <input
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Email:"
+                        placeholder={t('email') + '...'}
                         onChange={formik.handleChange}
                         value={formik.values.email}
                     />
                     {formik.errors.email}
                 </div>
                 <div>
-                    <label htmlFor="password">Password:</label>
+                    <label htmlFor="password">{t('password')}:</label>
                     <input
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="Password:"
+                        placeholder={t('password') + '...'}
                         onChange={formik.handleChange}
                         value={formik.values.password}
                     />
                     {formik.errors.password}
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit">{t('register.submit')}</button>
             </form>
         </div>
     );

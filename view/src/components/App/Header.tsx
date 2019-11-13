@@ -1,8 +1,11 @@
 import React from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export const Header: React.FC = () => {
+    const { t } = useTranslation();
+
     return (
         <header>
             <nav>
@@ -11,7 +14,7 @@ export const Header: React.FC = () => {
                         <Link to="/">UBlog</Link>
                     </li>
                     <li>
-                        <Link to="/register">Register</Link>
+                        <Link to="/register">{t('register.sign-up')}</Link>
                     </li>
                 </ul>
             </nav>
