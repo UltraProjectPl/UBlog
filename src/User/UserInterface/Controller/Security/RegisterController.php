@@ -66,7 +66,7 @@ final class RegisterController
 
             if (false === $user instanceof User) {
                 throw new RuntimeException(
-                    sprintf('Failed to create and/or retrieve student with email: "%s"', $dto->email)
+                    sprintf('Failed to create and/or retrieve user with email: "%s"', $dto->email)
                 );
             }
 
