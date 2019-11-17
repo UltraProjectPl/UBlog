@@ -4,11 +4,21 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd"
 >
-    <entity name="App\User\Domain\User">
+    <entity name="App\User\Domain\Session">
         <id name="id" type="uuid" >
             <generator strategy="NONE" />
         </id>
-        <field name="email" unique="true" />
-        <field name="password" />
+
+        <field name="token" nullable="true" />
+        <field name="tokens" type="array" />
+
+        <field name="rememberMe" type="boolean" />
+
+        <field name="loginDate" type="datetime" />
+        <field name="loginDates" type="array" />
+
+        <field name="tokenValidTo" type="datetime" nullable="true" />
+        <field name="firstLoginIp" nullable="true" />
+        <field name="ips" type="array" />
     </entity>
 </doctrine-mapping>

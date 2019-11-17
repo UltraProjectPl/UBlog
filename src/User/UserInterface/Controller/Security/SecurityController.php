@@ -44,8 +44,11 @@ final class SecurityController
 
     public function index(Request $request): Response
     {
-        [$email, $password] = $request->request->all();
-        $rememberMe = $request->request->get('rememberMe', false);
+        [
+            'email' => $email,
+            'password' => $password,
+            'rememberMe' => $rememberMe
+        ] = $request->request->all();
 
         /** @var User|null $user */
         $user = $this->queryBus->query(new UserByEmail($email));

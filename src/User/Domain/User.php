@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\User\Domain;
 
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 final class User
@@ -28,11 +29,10 @@ final class User
     private $token = null;
 
     public function __construct(
-        UuidInterface $id,
         string $email,
         string $password
     ) {
-        $this->id = $id;
+        $this->id = Uuid::uuid4();
         $this->email = $email;
         $this->changePassword($password);
     }
