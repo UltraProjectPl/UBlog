@@ -5,7 +5,7 @@ namespace App\User\Application\Query;
 
 use App\SharedKernel\Application\Query\QueryInterface;
 
-final class ActiveSessionByUserEmail implements QueryInterface
+final class ActiveSessionsByUserEmail implements QueryInterface
 {
     /**
      * @var string

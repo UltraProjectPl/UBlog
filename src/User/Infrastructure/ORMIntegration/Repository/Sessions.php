@@ -14,7 +14,7 @@ final class Sessions extends ServiceEntityRepository implements DomainSessions
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, User::class);
+        parent::__construct($registry, Session::class);
     }
 
     public function add(Session $session): void
@@ -23,7 +23,11 @@ final class Sessions extends ServiceEntityRepository implements DomainSessions
         $this->getEntityManager()->flush($session);
     }
 
-    public function findOneActiveByUserEmail(string $email): ?Session
+    /**
+     * @param string $email
+     * @return Session[]
+     */
+    public function findOneActiveByUserEmail(string $email): array
     {
         return $this
             ->getEntityManager()
@@ -31,9 +35,10 @@ final class Sessions extends ServiceEntityRepository implements DomainSessions
             ->select('s')
             ->from($this->getEntityName(), 's')
             ->innerJoin('s.user', 'u', Join::WITH, 'u.email = :email')
-            ->andWhere('s.token != null')
+            ->andWhere('s.token IS NOT null')
+            ->setParameters(['email' => $email])
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
 }

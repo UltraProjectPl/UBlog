@@ -5,9 +5,12 @@ namespace App\User\UserInterface\Controller\Security;
 
 use App\SharedKernel\Application\Bus\CommandBusInterface;
 use App\SharedKernel\Application\Bus\QueryBusInterface;
+use App\SharedKernel\Application\Form\FormHandlerFactoryInterface;
 use App\SharedKernel\UserInterface\Http\ResponseFactoryInterface;
 use App\User\Application\Command\LoginUser;
-use App\User\Application\Query\ActiveSessionByUserEmail;
+use App\User\Application\Form\DTO\Security\SecurityDTO;
+use App\User\Application\Form\Security\SecurityFormInterface;
+use App\User\Application\Query\ActiveSessionsByUserEmail;
 use App\User\Application\Query\UserByEmail;
 use App\User\Domain\Session;
 use App\User\Domain\User;
@@ -23,6 +26,11 @@ final class SecurityController
     private $responseFactory;
 
     /**
+     * @var FormHandlerFactoryInterface
+     */
+    private $formHandlerFactory;
+
+    /**
      * @var CommandBusInterface
      */
     private $commandBus;
@@ -34,40 +42,46 @@ final class SecurityController
 
     public function __construct(
         ResponseFactoryInterface $responseFactory,
+        FormHandlerFactoryInterface $formHandlerFactory,
         CommandBusInterface $commandBus,
         QueryBusInterface $queryBus
     ) {
         $this->responseFactory = $responseFactory;
+        $this->formHandlerFactory = $formHandlerFactory;
         $this->commandBus = $commandBus;
         $this->queryBus = $queryBus;
     }
 
     public function index(Request $request): Response
     {
-        [
-            'email' => $email,
-            'password' => $password,
-            'rememberMe' => $rememberMe
-        ] = $request->request->all();
+        $formHandler = $this->formHandlerFactory->createFromRequest($request, SecurityFormInterface::class);
+        if (true === $formHandler->isSubmissionValid()) {
+            /** @var SecurityDTO $dto */
+            $dto = $formHandler->getData();
 
-        /** @var User|null $user */
-        $user = $this->queryBus->query(new UserByEmail($email));
+            /** @var User|null $user */
+            $user = $this->queryBus->query(new UserByEmail($dto->email));
 
-        if (null === $user || $user->verifyPassword($password)) {
-            return $this->responseFactory->error('Invalid login data');
+            if (null === $user || $user->verifyPassword($dto->password)) {
+                return $this->responseFactory->error('Invalid login data');
+            }
+
+            $this->commandBus->dispatch(new LoginUser($user, $dto->rememberMe, $request->getClientIp()));
+
+            /** @var Session[] $sessions */
+            $sessions = $this->queryBus->query(new ActiveSessionsByUserEmail($user->getEmail()));
+
+            dd($sessions[0]);
+
+            if (0 < count($sessions) && false === $sessions[0] instanceof Session) {
+                throw new RuntimeException(
+                    sprintf('Failed to authorization user with email: %s', $user->getEmail())
+                );
+            }
+
+            return $this->responseFactory->authorization($sessions[0]->getToken());
         }
 
-        $this->commandBus->dispatch(new LoginUser($user, $rememberMe, $request->getClientIp()));
-
-        /** @var Session|null $session */
-        $session = $this->queryBus->query(new ActiveSessionByUserEmail($user->getEmail()));
-
-        if (false === $user instanceof Session) {
-            throw new RuntimeException(
-                sprintf('Failed to authorization user with email: %s', $user->getEmail())
-            );
-        }
-
-        return $this->responseFactory->authorization($session->getToken());
+        return $this->responseFactory->error('Failed');
     }
 }

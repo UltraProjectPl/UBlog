@@ -20,14 +20,9 @@ final class Session
     private $token;
 
     /**
-     * @var User
+     * @var DateTimeImmutable|null
      */
-    private $user;
-
-    /**
-     * @var DateTimeImmutable
-     */
-    private $loginDate;
+    private $tokenValidTo;
 
     /**
      * @var bool
@@ -35,14 +30,9 @@ final class Session
     private $rememberMe;
 
     /**
-     * @var array<DateTimeImmutable>
+     * @var DateTimeImmutable
      */
-    private $loginDates;
-
-    /**
-     * @var DateTimeImmutable|null
-     */
-    private $tokenValidTo;
+    private $loginDate;
 
     /**
      * @var string|null
@@ -50,14 +40,9 @@ final class Session
     private $firstLoginIp;
 
     /**
-     * @var array<string>
+     * @varActiveSessionByUserEmailHandler User
      */
-    private $ips;
-
-    /**
-     * @var array<string>
-     */
-    private $tokens = [];
+    private $user;
 
     public function __construct(
         User $user,
@@ -67,7 +52,7 @@ final class Session
         $this->id = Uuid::uuid4();
         $this->user = $user;
         $this->token = self::createToken();
-        $this->loginDate[] = new DateTimeImmutable();
+        $this->loginDate = new DateTimeImmutable();
         $this->rememberMe = $rememberMe;
 
         if (false === $rememberMe) {
@@ -104,7 +89,6 @@ final class Session
 
     public function disable(): self
     {
-        $this->tokens[] = $this->token;
         $this->token = null;
 
         $this->rememberMe = false;
@@ -123,26 +107,11 @@ final class Session
 
     public function refreshToken(): self
     {
-        $this->tokens[] = $this->token;
         $this->token = self::createToken();
 
         if (false === $this->rememberMe) {
             $this->tokenValidTo = new DateTimeImmutable('+12 hours');
         }
-
-        return $this;
-    }
-
-    public function addNewIpLogin(string $ip): self
-    {
-        $this->ips[] = $ip;
-
-        return $this;
-    }
-
-    public function addNewLoginDate(): self
-    {
-        $this->loginDates[] = new DateTimeImmutable();
 
         return $this;
     }

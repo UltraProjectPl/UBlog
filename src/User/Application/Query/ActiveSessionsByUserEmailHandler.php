@@ -7,7 +7,7 @@ use App\SharedKernel\Application\Bus\QueryHandlerInterface;
 use App\User\Domain\Session;
 use App\User\Domain\Sessions;
 
-final class ActiveSessionByUserEmailHandler implements QueryHandlerInterface
+final class ActiveSessionsByUserEmailHandler implements QueryHandlerInterface
 {
     /**
      * @var Sessions
@@ -19,7 +19,11 @@ final class ActiveSessionByUserEmailHandler implements QueryHandlerInterface
         $this->sessions = $sessions;
     }
 
-    public function __invoke(ActiveSessionByUserEmail $query): ?Session
+    /**
+     * @param ActiveSessionsByUserEmail $query
+     * @return Session[]
+     */
+    public function __invoke(ActiveSessionsByUserEmail $query): array
     {
         return $this->sessions->findOneActiveByUserEmail($query->getEmail());
     }
