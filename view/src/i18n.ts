@@ -12,7 +12,8 @@ const resources = {
             },
             'security': {
                 'sign-in': 'Sign in',
-                'submit': 'Submit'
+                'submit': 'Submit',
+                'rememberMe': "Remember me"
             }
         },
     },
@@ -26,7 +27,8 @@ const resources = {
             },
             'security': {
                 'sign-in': 'Zaloguj się',
-                'submit': 'Zaloguj się'
+                'submit': 'Zaloguj się',
+                'rememberMe': "Zapamiętaj mnie"
             }
         }
     }

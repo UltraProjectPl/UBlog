@@ -19,6 +19,7 @@ export interface RegisterState {
 export interface SecurityState {
     email: string
     password: string
+    rememberMe: boolean
 }
 
 export const RegisterSchema = Yup.object().shape({
@@ -28,5 +29,6 @@ export const RegisterSchema = Yup.object().shape({
 
 export const SecuritySchema = Yup.object().shape({
     email: Yup.string().email().required(),
-    password: Yup.string().min(5).max(255).required(),
+    password: Yup.string().required(),
+    requiredMe: Yup.bool().notRequired()
 });

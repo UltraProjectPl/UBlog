@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 export const Security: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [rememberMe, setRememberMe] = useState<boolean>(false);
 
     const dispatch = useDispatch();
     const { t } = useTranslation();
@@ -17,7 +18,8 @@ export const Security: React.FC = () => {
     const formik = useFormik({
         initialValues: {
             email,
-            password
+            password,
+            rememberMe
         },
         validationSchema: SecuritySchema,
         onSubmit: values => {
@@ -51,6 +53,16 @@ export const Security: React.FC = () => {
                         value={formik.values.password}
                     />
                     {formik.errors.password}
+                </div>
+                <div>
+                    <label htmlFor="rememberMe">{t('rememberMe')}</label>
+                    <input
+                        type="checkbox"
+                        id="rememberMe"
+                        name="rememberMe"
+                        onChange={formik.handleChange}
+                        value={formik.values.rememberMe ? 1 : 0}
+                    />
                 </div>
                 <button type="submit">{t('security.submit')}</button>
             </form>

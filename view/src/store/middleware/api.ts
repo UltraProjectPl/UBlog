@@ -17,6 +17,7 @@ export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, Appl
                 });
 
                 const response = await fetch(request);
+                break;
             }
             case AuthenticationActionTypes.SECURITY: {
                 const payload = action.payload;
@@ -30,6 +31,7 @@ export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, Appl
                 });
 
                 const response = await fetch(request);
+                break;
             }
         }
 
