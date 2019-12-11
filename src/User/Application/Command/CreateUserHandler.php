@@ -8,7 +8,6 @@ use App\SharedKernel\Application\Bus\EventBusInterface;
 use App\User\Application\Event\UserCreated;
 use App\User\Domain\User;
 use App\User\Domain\Users;
-use Ramsey\Uuid\Uuid;
 
 final class CreateUserHandler implements CommandHandlerInterface
 {
@@ -28,10 +27,9 @@ final class CreateUserHandler implements CommandHandlerInterface
         $this->eventBus = $eventBus;
     }
 
-    public function __invoke(CreateUser $command)
+    public function __invoke(CreateUser $command): void
     {
         $user = new User(
-            Uuid::uuid4(),
             $command->getEmail(),
             $command->getPassword()
         );

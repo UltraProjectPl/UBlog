@@ -16,6 +16,9 @@ export const Header: React.FC = () => {
                     <li>
                         <Link to="/register">{t('register.sign-up')}</Link>
                     </li>
+                    <li>
+                        <Link to="/security">{t('security.sign-in')}</Link>
+                    </li>
                 </ul>
             </nav>
         </header>

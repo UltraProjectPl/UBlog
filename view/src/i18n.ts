@@ -9,6 +9,11 @@ const resources = {
             'register': {
                 'sign-up': 'Sign up',
                 'submit': 'Submit'
+            },
+            'security': {
+                'sign-in': 'Sign in',
+                'submit': 'Submit',
+                'rememberMe': "Remember me"
             }
         },
     },
@@ -19,6 +24,11 @@ const resources = {
             'register': {
                 'sign-up': 'Zarejestruj się',
                 'submit': 'Zarejestruj się za darmo!'
+            },
+            'security': {
+                'sign-in': 'Zaloguj się',
+                'submit': 'Zaloguj się',
+                'rememberMe': "Zapamiętaj mnie"
             }
         }
     }

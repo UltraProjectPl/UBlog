@@ -17,6 +17,21 @@ export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, Appl
                 });
 
                 const response = await fetch(request);
+                break;
+            }
+            case AuthenticationActionTypes.SECURITY: {
+                const payload = action.payload;
+
+                const request = new Request('http://localhost/auth/security', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const response = await fetch(request);
+                break;
             }
         }
 

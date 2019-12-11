@@ -7,18 +7,18 @@ use App\SharedKernel\Application\Bus\CommandBusInterface;
 use App\SharedKernel\Application\Bus\QueryBusInterface;
 use App\SharedKernel\Application\Form\FormHandlerFactoryInterface;
 use App\SharedKernel\UserInterface\Http\ResponseFactoryInterface;
-use App\User\Application\Form\DTO\Security\RegisterDTO;
-use App\User\Application\Form\Security\RegisterFormInterface;
+use App\User\Application\Command\LoginUser;
+use App\User\Application\Form\DTO\Security\SecurityDTO;
+use App\User\Application\Form\Security\SecurityFormInterface;
+use App\User\Application\Query\ActiveSessionsByUserEmail;
 use App\User\Application\Query\UserByEmail;
+use App\User\Domain\Session;
 use App\User\Domain\User;
 use RuntimeException;
-use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class RegisterController
+final class SecurityController
 {
     /**
      * @var ResponseFactoryInterface
@@ -54,25 +54,32 @@ final class RegisterController
 
     public function index(Request $request): Response
     {
-        $formHandler = $this->formHandlerFactory->createFromRequest($request, RegisterFormInterface::class);
+        $formHandler = $this->formHandlerFactory->createFromRequest($request, SecurityFormInterface::class);
         if (true === $formHandler->isSubmissionValid()) {
-            /** @var RegisterDTO $dto */
+            /** @var SecurityDTO $dto */
             $dto = $formHandler->getData();
 
-            $this->commandBus->dispatch($dto->toCommand());
-
-            /** @var User $user */
+            /** @var User|null $user */
             $user = $this->queryBus->query(new UserByEmail($dto->email));
 
-            if (false === $user instanceof User) {
+            if (null === $user || $user->verifyPassword($dto->password)) {
+                return $this->responseFactory->error('Invalid login data');
+            }
+
+            $this->commandBus->dispatch(new LoginUser($user, $dto->rememberMe, $request->getClientIp()));
+
+            /** @var Session[] $sessions */
+            $sessions = $this->queryBus->query(new ActiveSessionsByUserEmail($user->getEmail()));
+
+            dd($sessions[0]);
+
+            if (0 < count($sessions) && false === $sessions[0] instanceof Session) {
                 throw new RuntimeException(
-                    sprintf('Failed to create and/or retrieve user with email: "%s"', $dto->email)
+                    sprintf('Failed to authorization user with email: %s', $user->getEmail())
                 );
             }
 
-            return $this->responseFactory->create([
-                'email' => $user->getEmail()
-            ]);
+            return $this->responseFactory->authorization($sessions[0]->getToken());
         }
 
         return $this->responseFactory->error('Failed');

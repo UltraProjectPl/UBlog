@@ -12,5 +12,9 @@
         <service id="App\User\Domain\Users"
                  alias="App\User\Infrastructure\ORMIntegration\Repository\Users"
         />
+
+        <service id="App\User\Domain\Sessions"
+                 alias="App\User\Infrastructure\ORMIntegration\Repository\Sessions"
+        />
     </services>
 </container>
