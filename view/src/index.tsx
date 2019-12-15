@@ -23,8 +23,12 @@ ReactDOM.render(
             <Header />
             <main>
                 <Route path="/" component={App} />
-                <Route path="/register" component={Register} />
-                <Route path="/security" component={Security} />
+                {store.getState().authentication.isAuthenticated ? (
+                    <p>Zalogowany</p>
+                ) : (<>
+                    <Route path="/register" component={Register} />
+                    <Route path="/security" component={Security} />
+                </>)}
             </main>
         </Router>
     </Provider>,

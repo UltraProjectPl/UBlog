@@ -2,10 +2,12 @@ import * as Yup from 'yup';
 
 export enum AuthenticationActionTypes {
     REGISTER = '@@authentication/REGISTER',
-    SECURITY = '@@authentication/SECURITY'
+    SECURITY = '@@authentication/SECURITY',
+    AUTHORIZATION = '@@authentication/AUTHORIZATION'
 }
 
 export interface AuthenticationState {
+    isAuthenticated: boolean
     email: string
     password: string
     token: string

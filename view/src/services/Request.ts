@@ -1,4 +1,4 @@
-export const request = async (path: string, body: string): Promise<Response> => {
+export const request = async (path: string, body: string): Promise<object> => {
     const request = new Request('http://localhost/' + path, {
         method: 'POST',
         headers: {
@@ -7,5 +7,8 @@ export const request = async (path: string, body: string): Promise<Response> => 
         body
     });
 
-    return await fetch(request);
+    return await fetch(request)
+        .then(response => response.json())
+        .catch(err => console.error(err))
+    ;
 };
