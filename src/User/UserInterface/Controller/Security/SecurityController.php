@@ -71,8 +71,6 @@ final class SecurityController
             /** @var Session[] $sessions */
             $sessions = $this->queryBus->query(new ActiveSessionsByUserEmail($user->getEmail()));
 
-            dd($sessions[0]);
-
             if (0 < count($sessions) && false === $sessions[0] instanceof Session) {
                 throw new RuntimeException(
                     sprintf('Failed to authorization user with email: %s', $user->getEmail())

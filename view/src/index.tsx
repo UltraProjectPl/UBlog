@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import createStore from './store/createStore';
 import { Route, Router } from 'react-router-dom'
 import { Register } from './components/Authentication/Register';
-import { Security } from "./components/Authentication/Security";
+import { Security } from './components/Authentication/Security';
 import { Header } from './components/App/Header';
 import { createBrowserHistory } from 'history';
 import './i18n';

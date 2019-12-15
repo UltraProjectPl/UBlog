@@ -1,6 +1,7 @@
 import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
 import { ApplicationAction, ApplicationState, ThunkDispatch } from '../index';
 import { AuthenticationActionTypes } from '../authentication/types';
+import { request } from '../../services/Request';
 
 export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, ApplicationState>) => {
     return (next: Dispatch) => async (action: ApplicationAction) => {
@@ -8,29 +9,14 @@ export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, Appl
             case AuthenticationActionTypes.REGISTER: {
                 const payload = action.payload;
 
-                const request = new Request('http://localhost/auth/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
+                const response = request('auth/register', JSON.stringify(payload));
 
-                const response = await fetch(request);
                 break;
             }
             case AuthenticationActionTypes.SECURITY: {
                 const payload = action.payload;
 
-                const request = new Request('http://localhost/auth/security', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                const response = await fetch(request);
+                const response = request('auth/security', JSON.stringify(payload));
                 break;
             }
         }
