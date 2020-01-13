@@ -5,6 +5,8 @@ import { useFormik } from 'formik';
 import { AuthenticationActions } from '../../store/authentication/actions';
 import { RegisterSchema } from '../../store/authentication/types';
 import { useTranslation } from 'react-i18next';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from '../../hooks/useSelector';
 
 export const Register: React.FC = () => {
     const [email, setEmail] = useState<string>('');
@@ -12,7 +14,6 @@ export const Register: React.FC = () => {
 
     const dispatch = useDispatch();
     const { t } = useTranslation();
-
 
     const formik = useFormik({
         initialValues: {
@@ -24,6 +25,11 @@ export const Register: React.FC = () => {
             dispatch(AuthenticationActions.register(values))
         }
     });
+
+    const isRedirect = useSelector(state => state.authentication.isRedirect);
+    if (isRedirect) {
+        return <Redirect to="/" />
+    }
 
     return (
         <div>

@@ -4,6 +4,9 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
     en: {
         translation: {
+            'app': {
+                'not-found': 'Not found'
+            },
             'email': 'Email',
             'password': 'Password',
             'register': {
@@ -19,6 +22,9 @@ const resources = {
     },
     pl: {
         translation: {
+            'app': {
+                'not-found': 'Nie znaleźono'
+            },
             'email': 'Email',
             'password': 'Hasło',
             'register': {

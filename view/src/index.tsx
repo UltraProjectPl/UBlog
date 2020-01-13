@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './index.css';
@@ -19,18 +19,11 @@ const container = document.querySelector('#root');
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={history}>
-            <Header />
-            <main>
-                <Route path="/" component={App} />
-                {store.getState().authentication.isAuthenticated ? (
-                    <p>Zalogowany</p>
-                ) : (<>
-                    <Route path="/register" component={Register} />
-                    <Route path="/security" component={Security} />
-                </>)}
-            </main>
-        </Router>
+         <Router history={history}>
+             <Header />
+             {store.getState().authentication.isAuthenticated ? <p>true</p> : <p>false</p>}
+             <App />
+         </Router>
     </Provider>,
     container
 );
