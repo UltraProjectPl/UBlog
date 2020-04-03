@@ -5,6 +5,8 @@ import { useFormik } from 'formik';
 import { AuthenticationActions } from '../../store/authentication/actions';
 import { RegisterSchema, SecuritySchema } from '../../store/authentication/types';
 import { useTranslation } from 'react-i18next';
+import {useSelector} from "../../hooks/useSelector";
+import {Redirect} from "react-router-dom";
 
 export const Security: React.FC = () => {
     const [email, setEmail] = useState<string>('');
@@ -26,6 +28,11 @@ export const Security: React.FC = () => {
             dispatch(AuthenticationActions.security(values))
         }
     });
+
+    const isRedirect = useSelector(state => state.authentication.isRedirect);
+    if (isRedirect) {
+        return <Redirect to="/" />
+    }
 
     return (
         <div>

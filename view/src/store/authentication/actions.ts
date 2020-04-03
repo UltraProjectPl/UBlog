@@ -8,8 +8,8 @@ export const AuthenticationActions = {
         createAction(AuthenticationActionTypes.REGISTER, p),
     security: (p: SecurityState) =>
         createAction(AuthenticationActionTypes.SECURITY, p),
-    redirectAfterRegister: () =>
-        createAction(AuthenticationActionTypes.REDIRECT_AFTER_REGISTER)
+    redirectHomepage: () =>
+        createAction(AuthenticationActionTypes.REDIRECT_HOMEPAGE),
 };
 
 export type AuthenticationActions = ActionsUnion<typeof AuthenticationActions>
