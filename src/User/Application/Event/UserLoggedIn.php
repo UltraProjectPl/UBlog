@@ -9,15 +9,9 @@ use App\User\Domain\User;
 
 final class UserLoggedIn implements EventInterface
 {
-    /**
-     * @var User
-     */
-    private $user;
+    private User $user;
 
-    /**
-     * @var Session
-     */
-    private $session;
+    private Session $session;
 
     public function __construct(User $user, Session $session)
     {

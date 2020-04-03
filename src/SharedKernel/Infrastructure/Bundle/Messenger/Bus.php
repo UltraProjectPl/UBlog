@@ -7,10 +7,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 abstract class Bus
 {
-    /**
-     * @var MessageBusInterface
-     */
-    protected $bus;
+    protected MessageBusInterface $bus;
 
     public function __construct(MessageBusInterface $bus)
     {

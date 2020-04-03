@@ -11,15 +11,9 @@ use App\User\Domain\Users;
 
 final class CreateUserHandler implements CommandHandlerInterface
 {
-    /**
-     * @var Users
-     */
-    private $users;
+    private Users $users;
 
-    /**
-     * @var EventBusInterface
-     */
-    private $eventBus;
+    private EventBusInterface $eventBus;
 
     public function __construct(Users $users, EventBusInterface $eventBus)
     {

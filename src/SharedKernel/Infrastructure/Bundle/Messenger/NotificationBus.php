@@ -11,7 +11,7 @@ final class NotificationBus extends Bus implements NotificationBusInterface
     /**
      * @var NotificationInterface[]
      */
-    private $notification = [];
+    private array $notification = [];
 
     public function send(NotificationInterface $notification): void
     {

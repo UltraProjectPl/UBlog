@@ -10,16 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class FormHandlerFactory implements FormHandlerFactoryInterface
 {
+    private FormFactoryInterface $formFactory;
 
-    /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
-
-    /**
-     * @var FormClassResolver
-     */
-    private $formClassResolver;
+    private FormClassResolver $formClassResolver;
 
     public function __construct(FormFactoryInterface $formFactory, FormClassResolver $formClassResolver)
     {

@@ -8,10 +8,7 @@ use App\User\Domain\User;
 
 final class UserCreated implements EventInterface
 {
-    /**
-     * @var User
-     */
-    private $user;
+    private User $user;
 
     public function __construct(User $user)
     {

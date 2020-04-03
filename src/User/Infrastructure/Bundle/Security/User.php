@@ -19,25 +19,13 @@ final class User implements UserInterface, Serializable
 {
     public const ROLE = 'ROLE_USER';
 
-    /**
-     * @var DomainUser
-     */
-    private $user;
+    private DomainUser $user;
 
-    /**
-     * @var string
-     */
-    private $username;
+    private string $username;
 
-    /**
-     * @var string
-     */
-    private $password;
+    private string $password;
 
-    /**
-     * @var string
-     */
-    private $token;
+    private string $token;
 
     public function __construct(DomainUser $user, string $token)
     {

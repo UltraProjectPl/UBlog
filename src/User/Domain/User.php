@@ -8,25 +8,13 @@ use Ramsey\Uuid\UuidInterface;
 
 final class User
 {
-    /**
-     * @var UuidInterface
-     */
-    private $id;
+    private UuidInterface $id;
 
-    /**
-     * @var string
-     */
-    private $email;
+    private string $email;
 
-    /**
-     * @var string
-     */
-    private $password;
+    private string $password;
 
-    /**
-     * @var string|null
-     */
-    private $token = null;
+    private ?string $token = null;
 
     public function __construct(
         string $email,

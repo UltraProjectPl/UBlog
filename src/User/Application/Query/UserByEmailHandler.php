@@ -9,10 +9,7 @@ use App\User\Domain\Users;
 
 final class UserByEmailHandler implements QueryHandlerInterface
 {
-    /**
-     * @var Users
-     */
-    private $users;
+    private Users $users;
 
     public function __construct(Users $users)
     {

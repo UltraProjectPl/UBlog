@@ -11,10 +11,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class UniqueEmailValidator extends ConstraintValidator
 {
-    /**
-     * @var QueryBusInterface
-     */
-    private $queryBus;
+    private QueryBusInterface $queryBus;
 
     public function __construct(QueryBusInterface $queryBus)
     {
