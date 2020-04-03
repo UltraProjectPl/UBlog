@@ -12,7 +12,7 @@ export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, Appl
 
                 const response = await request('auth/register', JSON.stringify(payload));
 
-                api.dispatch(AuthenticationActions.redirectAfterRegister());
+                api.dispatch(AuthenticationActions.redirectHomepage());
 
                 break;
             }
@@ -25,10 +25,10 @@ export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, Appl
                     api.dispatch(AuthenticationActions.authorization({
                         // @ts-ignore
                         token: response.token,
-                        isAuthenticated: true,
                         isRedirect: false,
                         ...payload
-                    }))
+                    }));
+                    api.dispatch(AuthenticationActions.redirectHomepage());
                 }
 
                 break;

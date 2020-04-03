@@ -6,7 +6,6 @@ const initialState: AuthenticationState = {
     email: '',
     password: '',
     token: '',
-    isAuthenticated: false,
     isRedirect: false
 };
 
@@ -15,7 +14,7 @@ export const authenticationReducer: Reducer<
     AuthenticationActions
 > = (state = initialState, action) => {
     switch (action.type) {
-        case AuthenticationActionTypes.REDIRECT_AFTER_REGISTER: {
+        case AuthenticationActionTypes.REDIRECT_HOMEPAGE: {
             return Object.assign({}, state, {
                 isRedirect: true
             });
@@ -24,6 +23,11 @@ export const authenticationReducer: Reducer<
             const payload = action.payload;
 
             return Object.assign({}, state, payload);
+        }
+        case AuthenticationActionTypes.LOGOUT: {
+            return Object.assign({}, state, {
+                token: ''
+            })
         }
         default: {
             return state

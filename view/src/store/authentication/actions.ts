@@ -10,6 +10,8 @@ export const AuthenticationActions = {
         createAction(AuthenticationActionTypes.SECURITY, p),
     redirectHomepage: () =>
         createAction(AuthenticationActionTypes.REDIRECT_HOMEPAGE),
+    logout: () =>
+        createAction(AuthenticationActionTypes.LOGOUT),
 };
 
 export type AuthenticationActions = ActionsUnion<typeof AuthenticationActions>

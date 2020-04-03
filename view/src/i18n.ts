@@ -16,7 +16,8 @@ const resources = {
             'security': {
                 'sign-in': 'Sign in',
                 'submit': 'Submit',
-                'rememberMe': "Remember me"
+                'rememberMe': "Remember me",
+                'logout': 'Logout'
             }
         },
     },
@@ -34,7 +35,8 @@ const resources = {
             'security': {
                 'sign-in': 'Zaloguj się',
                 'submit': 'Zaloguj się',
-                'rememberMe': "Zapamiętaj mnie"
+                'rememberMe': 'Zapamiętaj mnie',
+                'logout': 'Wyloguj'
             }
         }
     }

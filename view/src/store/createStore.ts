@@ -2,6 +2,7 @@ import { ApplicationAction, ApplicationState, createRootReducer } from './index'
 import { applyMiddleware, compose, createStore, Store } from 'redux';
 import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { apiMiddleware } from './middleware/api';
+import { loadToken } from '../services/LocalStorage';
 
 declare global {
     interface Window {
@@ -15,8 +16,8 @@ const composeEnhancers =
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
         : compose;
 
-export default (initialState: Partial<ApplicationState> = {}) =>
-    createStore(
+export default (initialState: Partial<ApplicationState> = {}) => {
+    return createStore(
         createRootReducer(),
         initialState,
         composeEnhancers(
@@ -26,3 +27,4 @@ export default (initialState: Partial<ApplicationState> = {}) =>
             )
         )
     ) as Store<ApplicationState>;
+}
