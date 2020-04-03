@@ -5,7 +5,8 @@ import { AuthenticationActions } from './actions';
 const initialState: AuthenticationState = {
     email: '',
     password: '',
-    token: ''
+    token: '',
+    isRedirect: false
 };
 
 export const authenticationReducer: Reducer<
@@ -13,17 +14,18 @@ export const authenticationReducer: Reducer<
     AuthenticationActions
 > = (state = initialState, action) => {
     switch (action.type) {
-        case AuthenticationActionTypes.REGISTER: {
+        case AuthenticationActionTypes.REDIRECT_HOMEPAGE: {
             return Object.assign({}, state, {
-                email: '',
-                password: '',
-                token: ''
-            })
+                isRedirect: true
+            });
         }
-        case AuthenticationActionTypes.SECURITY: {
+        case AuthenticationActionTypes.AUTHORIZATION: {
+            const payload = action.payload;
+
+            return Object.assign({}, state, payload);
+        }
+        case AuthenticationActionTypes.LOGOUT: {
             return Object.assign({}, state, {
-                email: '',
-                password: '',
                 token: ''
             })
         }

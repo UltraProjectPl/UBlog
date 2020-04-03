@@ -4,6 +4,9 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
     en: {
         translation: {
+            'app': {
+                'not-found': 'Not found'
+            },
             'email': 'Email',
             'password': 'Password',
             'register': {
@@ -13,12 +16,16 @@ const resources = {
             'security': {
                 'sign-in': 'Sign in',
                 'submit': 'Submit',
-                'rememberMe': "Remember me"
+                'rememberMe': "Remember me",
+                'logout': 'Logout'
             }
         },
     },
     pl: {
         translation: {
+            'app': {
+                'not-found': 'Nie znaleźono'
+            },
             'email': 'Email',
             'password': 'Hasło',
             'register': {
@@ -28,7 +35,8 @@ const resources = {
             'security': {
                 'sign-in': 'Zaloguj się',
                 'submit': 'Zaloguj się',
-                'rememberMe': "Zapamiętaj mnie"
+                'rememberMe': 'Zapamiętaj mnie',
+                'logout': 'Wyloguj'
             }
         }
     }

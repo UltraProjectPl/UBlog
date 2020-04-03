@@ -1,32 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import './index.css';
 import { App } from './components/App/App';
-import * as serviceWorker from './serviceWorker';
-import createStore from './store/createStore';
-import { Route, Router } from 'react-router-dom'
-import { Register } from './components/Authentication/Register';
-import { Security } from "./components/Authentication/Security";
+import { Router } from 'react-router-dom'
 import { Header } from './components/App/Header';
 import { createBrowserHistory } from 'history';
+import {loadToken, saveToken} from './services/LocalStorage';
+import createStore from './store/createStore';
+import * as serviceWorker from './serviceWorker';
 import './i18n';
+import './index.css';
 
-const store = createStore();
+let initialState = {};
+
+const loadTokenFromStorage = loadToken();
+if (null !== loadTokenFromStorage) {
+    initialState = {
+        authentication: {
+            token: loadTokenFromStorage
+        }
+    };
+}
+
+const store = createStore(initialState);
 const history = createBrowserHistory();
 
 const container = document.querySelector('#root');
 
+store.subscribe(() => {
+    saveToken(store.getState().authentication.token);
+});
+
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={history}>
-            <Header />
-            <main>
-                <Route path="/" component={App} />
-                <Route path="/register" component={Register} />
-                <Route path="/security" component={Security} />
-            </main>
-        </Router>
+         <Router history={history}>
+             <Header />
+             <App />
+         </Router>
     </Provider>,
     container
 );
