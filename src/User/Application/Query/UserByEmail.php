@@ -7,10 +7,7 @@ use App\SharedKernel\Application\Query\QueryInterface;
 
 final class UserByEmail implements QueryInterface
 {
-    /**
-     * @var string
-     */
-    private $email;
+    private string $email;
 
     public function __construct(string $email)
     {

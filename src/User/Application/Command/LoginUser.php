@@ -8,20 +8,11 @@ use App\User\Domain\User;
 
 class LoginUser implements CommandInterface
 {
-    /**
-     * @var User
-     */
-    private $user;
+    private User $user;
 
-    /**
-     * @var bool
-     */
-    private $rememberMe;
+    private bool $rememberMe;
 
-    /**
-     * @var string|null
-     */
-    private $ip;
+    private ?string $ip;
 
     public function __construct(User $user, bool $rememberMe = false, ?string $ip = null)
     {

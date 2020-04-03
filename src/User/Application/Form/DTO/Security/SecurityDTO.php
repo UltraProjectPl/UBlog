@@ -5,18 +5,9 @@ namespace App\User\Application\Form\DTO\Security;
 
 final class SecurityDTO
 {
-    /**
-     * @var string
-     */
-    public $email;
+    public string $email;
 
-    /**
-     * @var string
-     */
-    public $password;
+    public string $password;
 
-    /**
-     * @var bool
-     */
-    public $rememberMe;
+    public bool $rememberMe;
 }

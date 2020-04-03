@@ -20,25 +20,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class SecurityController
 {
-    /**
-     * @var ResponseFactoryInterface
-     */
-    private $responseFactory;
+    private ResponseFactoryInterface $responseFactory;
 
-    /**
-     * @var FormHandlerFactoryInterface
-     */
-    private $formHandlerFactory;
+    private FormHandlerFactoryInterface $formHandlerFactory;
 
-    /**
-     * @var CommandBusInterface
-     */
-    private $commandBus;
+    private CommandBusInterface $commandBus;
 
-    /**
-     * @var QueryBusInterface
-     */
-    private $queryBus;
+    private QueryBusInterface $queryBus;
 
     public function __construct(
         ResponseFactoryInterface $responseFactory,

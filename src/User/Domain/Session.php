@@ -9,35 +9,17 @@ use Ramsey\Uuid\UuidInterface;
 
 final class Session
 {
-    /**
-     * @var UuidInterface
-     */
-    private $id;
+    private UuidInterface $id;
 
-    /**
-     * @var string|null
-     */
-    private $token;
+    private ?string $token;
 
-    /**
-     * @var DateTimeImmutable|null
-     */
-    private $tokenValidTo;
+    private ?DateTimeImmutable $tokenValidTo;
 
-    /**
-     * @var bool
-     */
-    private $rememberMe;
+    private bool $rememberMe;
 
-    /**
-     * @var DateTimeImmutable
-     */
-    private $loginDate;
+    private DateTimeImmutable $loginDate;
 
-    /**
-     * @var string|null
-     */
-    private $firstLoginIp;
+    private ? string$firstLoginIp;
 
     /**
      * @varActiveSessionByUserEmailHandler User

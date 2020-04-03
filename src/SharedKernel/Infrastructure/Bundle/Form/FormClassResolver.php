@@ -11,7 +11,7 @@ class FormClassResolver
     /**
      * @var FormInterface[]
      */
-    private $forms;
+    private array $forms;
 
     public function __construct(array $forms)
     {

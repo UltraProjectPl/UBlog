@@ -7,5 +7,5 @@ use Symfony\Component\Validator\Constraint;
 
 class UniqueEmail extends Constraint
 {
-    public $message = 'Email must be unique';
+    public string $message = 'Email must be unique';
 }

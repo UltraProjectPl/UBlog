@@ -1,4 +1,4 @@
-FROM php:7.3-apache as api
+FROM php:7.4-apache as api
 
 RUN apt-get update -yqq && \
   apt-get install -yqq --no-install-recommends \

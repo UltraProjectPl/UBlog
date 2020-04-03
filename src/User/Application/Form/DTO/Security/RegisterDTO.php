@@ -7,15 +7,9 @@ use App\User\Application\Command\CreateUser;
 
 final class RegisterDTO
 {
-    /**
-     * @var string
-     */
-    public $email;
+    public string $email;
 
-    /**
-     * @var string
-     */
-    public $password;
+    public string $password;
 
     public function toCommand(): CreateUser
     {

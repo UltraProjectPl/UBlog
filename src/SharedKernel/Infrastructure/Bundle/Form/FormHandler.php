@@ -11,10 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class FormHandler implements FormHandlerInterface
 {
-    /**
-     * @var FormInterface
-     */
-    private $form;
+    private FormInterface $form;
 
     public function __construct(FormInterface $form, Request $request)
     {

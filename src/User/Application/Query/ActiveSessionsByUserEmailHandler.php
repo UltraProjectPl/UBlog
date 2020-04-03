@@ -9,10 +9,7 @@ use App\User\Domain\Sessions;
 
 final class ActiveSessionsByUserEmailHandler implements QueryHandlerInterface
 {
-    /**
-     * @var Sessions
-     */
-    private $sessions;
+    private Sessions $sessions;
 
     public function __construct(Sessions $sessions)
     {

@@ -7,15 +7,9 @@ use App\SharedKernel\Application\Command\CommandInterface;
 
 final class CreateUser implements CommandInterface
 {
-    /**
-     * @var string
-     */
-    private $email;
+    private string $email;
 
-    /**
-     * @var string
-     */
-    private $password;
+    private string $password;
 
     public function __construct(string $email, string $password)
     {

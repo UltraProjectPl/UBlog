@@ -11,15 +11,9 @@ use App\User\Domain\Sessions;
 
 class LoginUserHandler implements CommandHandlerInterface
 {
-    /**
-     * @var EventBusInterface
-     */
-    private $eventBus;
+    private EventBusInterface $eventBus;
 
-    /**
-     * @var Sessions
-     */
-    private $sessions;
+    private Sessions $sessions;
 
     public function __construct(Sessions $sessions, EventBusInterface $eventBus)
     {
