@@ -1,4 +1,5 @@
 import { Action, combineReducers } from 'redux';
+// @ts-ignore
 import { ThunkDispatch } from 'redux-thunk';
 import { AuthenticationActions } from './authentication/actions';
 import { authenticationReducer } from './authentication/reducers';

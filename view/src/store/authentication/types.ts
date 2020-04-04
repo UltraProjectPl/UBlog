@@ -17,7 +17,9 @@ export interface AuthenticationState {
 
 export interface RegisterState {
     email: string
-    password: string
+    password: string,
+    nick: string,
+    birthDate: string|undefined
 }
 
 export interface SecurityState {

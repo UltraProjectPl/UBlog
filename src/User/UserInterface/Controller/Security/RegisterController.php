@@ -63,6 +63,6 @@ final class RegisterController
             ]);
         }
 
-        return $this->responseFactory->error('Failed');
+        return $this->responseFactory->error($formHandler->getErrors());
     }
 }

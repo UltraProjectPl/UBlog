@@ -11,6 +11,8 @@ import { useSelector } from '../../hooks/useSelector';
 export const Register: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [nick, setNick] = useState<string>('');
+    const [birthDate, setBirthDate] = useState<string|undefined>(undefined);
 
     const dispatch = useDispatch();
     const { t } = useTranslation();
@@ -18,7 +20,9 @@ export const Register: React.FC = () => {
     const formik = useFormik({
         initialValues: {
             email,
-            password
+            nick,
+            password,
+            birthDate
         },
         validationSchema: RegisterSchema,
         onSubmit: values => {
@@ -45,6 +49,30 @@ export const Register: React.FC = () => {
                         value={formik.values.email}
                     />
                     {formik.errors.email}
+                </div>
+                <div>
+                    <label htmlFor="nick">{t('nick')}:</label>
+                    <input
+                        type="text"
+                        id="nick"
+                        name="nick"
+                        placeholder={t('nick') + '...'}
+                        onChange={formik.handleChange}
+                        value={formik.values.nick}
+                    />
+                    {formik.errors.nick}
+                </div>
+                <div>
+                    <label htmlFor="birthDate">{t('birthDate')}:</label>
+                    <input
+                        type="date"
+                        id="birthDate"
+                        name="birthDate"
+                        placeholder={t('birthDate') + '...'}
+                        onChange={formik.handleChange}
+                        value={formik.values.birthDate}
+                    />
+                    {formik.errors.birthDate}
                 </div>
                 <div>
                     <label htmlFor="password">{t('password')}:</label>

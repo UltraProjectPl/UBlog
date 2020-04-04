@@ -9,6 +9,7 @@ export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, Appl
         switch (action.type) {
             case AuthenticationActionTypes.REGISTER: {
                 const payload = action.payload;
+                console.log(payload);
 
                 const response = await request('auth/register', JSON.stringify(payload));
 
