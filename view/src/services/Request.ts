@@ -1,5 +1,5 @@
 export const request = async (path: string, body: string): Promise<object> => {
-    const request = new Request('http://localhost/' + path, {
+    const request = new Request('http://localhost/api/v1/' + path, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
