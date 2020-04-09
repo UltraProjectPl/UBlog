@@ -3,24 +3,16 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\ORMIntegration\Repository;
 
+use App\SharedKernel\Infrastructure\ORMIntegration\Repository\EntityRepository;
 use App\User\Domain\Session;
-use App\User\Domain\User;
 use App\User\Domain\Sessions as DomainSessions;
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 
-final class Sessions extends ServiceEntityRepository implements DomainSessions
+final class Sessions extends EntityRepository implements DomainSessions
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Session::class);
-    }
-
     public function add(Session $session): void
     {
-        $this->getEntityManager()->persist($session);
-        $this->getEntityManager()->flush($session);
+        $this->persistEntity($session);
     }
 
     /**
@@ -30,15 +22,25 @@ final class Sessions extends ServiceEntityRepository implements DomainSessions
     public function findOneActiveByUserEmail(string $email): array
     {
         return $this
-            ->getEntityManager()
-            ->createQueryBuilder()
-            ->select('s')
-            ->from($this->getEntityName(), 's')
+            ->getORMRepository(Session::class)
+            ->createQueryBuilder('s')
             ->innerJoin('s.user', 'u', Join::WITH, 'u.email = :email')
             ->andWhere('s.token IS NOT null')
             ->setParameters(['email' => $email])
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findOneByToken(string $token): ?Session
+    {
+        return $this
+            ->getORMRepository(Session::class)
+            ->createQueryBuilder('s')
+            ->where('s.token = :token')
+            ->setParameters(['token' => $token])
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }
