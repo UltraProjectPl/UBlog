@@ -15,7 +15,7 @@ use App\User\Domain\User as DomainUser;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Serializable;
 
-final class User implements UserInterface, Serializable
+final class User implements UserInterface
 {
     public const ROLE = 'ROLE_USER';
 
@@ -67,23 +67,5 @@ final class User implements UserInterface, Serializable
 
     public function eraseCredentials():void
     {
-    }
-
-    public function serialize(): string
-    {
-        return serialize([
-            'username' => $this->username,
-            'password' => $this->password,
-//            'token' => $this->token
-        ]);
-    }
-
-    public function unserialize($serialized): void
-    {
-        [
-            $this->username,
-            $this->password,
-//            $this->token
-        ] = unserialize($serialized, ['allowed_classes' => false]);
     }
 }
