@@ -3,6 +3,7 @@ import { ApplicationAction, ApplicationState, ThunkDispatch } from '../index';
 import { AuthenticationActionTypes } from '../authentication/types';
 import { request } from '../../services/Request';
 import { AuthenticationActions } from '../authentication/actions';
+import { UserActionTypes } from '../user/types';
 
 export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, ApplicationState>) => {
     return (next: Dispatch) => async (action: ApplicationAction) => {
@@ -34,8 +35,17 @@ export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, Appl
 
                 break;
             }
-        }
+            case UserActionTypes.LOAD_DATA: {
+                const payload = action.payload;
 
+
+                const response = await request('user/data', JSON.stringify({}));
+
+                console.log(response);
+
+                break;
+            }
+        }
         return next(action);
     }
 };

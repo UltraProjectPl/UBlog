@@ -21,10 +21,7 @@ final class Session
 
     private ? string$firstLoginIp;
 
-    /**
-     * @varActiveSessionByUserEmailHandler User
-     */
-    private $user;
+    private User $user;
 
     public function __construct(
         User $user,
