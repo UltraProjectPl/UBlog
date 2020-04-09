@@ -40,7 +40,7 @@ final class Sessions extends EntityRepository implements DomainSessions
             ->where('s.token = :token')
             ->setParameters(['token' => $token])
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
             ;
     }
 }

@@ -1,6 +1,6 @@
 import { Action, combineReducers } from 'redux';
 // @ts-ignore
-import { ThunkDispatch } from 'redux-thunk';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { AuthenticationActions } from './authentication/actions';
 import { authenticationReducer } from './authentication/reducers';
 import { userReducer } from './user/reducers';
@@ -17,4 +17,5 @@ export const createRootReducer = () => combineReducers({
 
 export type ApplicationState = ReturnType<ReturnType<typeof createRootReducer>>;
 
+export type ThunkResult<R> = ThunkAction<R, ApplicationState, {}, Action>;
 export type ThunkDispatch = ThunkDispatch<ApplicationState, {}, Action>;

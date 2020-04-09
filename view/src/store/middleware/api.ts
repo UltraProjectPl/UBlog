@@ -1,7 +1,7 @@
 import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
 import { ApplicationAction, ApplicationState, ThunkDispatch } from '../index';
 import { AuthenticationActionTypes } from '../authentication/types';
-import { request } from '../../services/Request';
+import { get, post } from '../../services/Request';
 import { AuthenticationActions } from '../authentication/actions';
 import { UserActionTypes } from '../user/types';
 
@@ -12,7 +12,7 @@ export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, Appl
                 const payload = action.payload;
                 console.log(payload);
 
-                const response = await request('auth/register', JSON.stringify(payload));
+                const response = await post('auth/register', JSON.stringify(payload));
 
                 api.dispatch(AuthenticationActions.redirectHomepage());
 
@@ -21,7 +21,7 @@ export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, Appl
             case AuthenticationActionTypes.SECURITY: {
                 const payload = action.payload;
 
-                const response = await request('auth/security', JSON.stringify(payload));
+                const response = await post('auth/security', JSON.stringify(payload));
 
                 if ('token' in response) {
                     api.dispatch(AuthenticationActions.authorization({
@@ -37,9 +37,11 @@ export const apiMiddleware: Middleware = (api: MiddlewareAPI<ThunkDispatch, Appl
             }
             case UserActionTypes.LOAD_DATA: {
                 const payload = action.payload;
+                const token = api.getState().authentication.token;
 
+                console.log(token);
 
-                const response = await request('user/data', JSON.stringify({}));
+                const response = await get(`user/data/${payload.email}`, token);
 
                 console.log(response);
 

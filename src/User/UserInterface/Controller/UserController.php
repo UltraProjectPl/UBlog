@@ -42,12 +42,14 @@ final class UserController
 
     public function data(Request $request): Response
     {
-        $formHandler = $this->formHandlerFactory->createFromRequest($request, SecurityFormInterface::class);
+        dump($request);;
+//        $formHandler = $this->formHandlerFactory->createFromRequest($request, SecurityFormInterface::class);
 
-        /** @var SecurityDTO $dto */
-        $dto = $formHandler->getData();
 
-        $user = $this->queryBus->query(new UserByEmail($dto->email));
+//        /** @var UserDTO $dto */
+//        $dto = $formHandler->getData();
+//
+//        $user = $this->queryBus->query(new UserByEmail($dto->email));
         return $this->responseFactory->data('true');
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\User\Infrastructure\Bundle\Security;
 
 use App\User\Application\Query\SessionByToken;
+use App\User\Application\Query\UserByEmail;
 use App\User\Domain\Session;
 use App\SharedKernel\Application\Bus\QueryBusInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -55,7 +56,6 @@ final class ApiAuthenticator extends AbstractGuardAuthenticator
         if (null === $session) {
             return null;
         }
-
         return $userProvider->loadUserByUsername($session->getUser()->getEmail());
     }
 

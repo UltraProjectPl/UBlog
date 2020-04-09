@@ -4,6 +4,10 @@ export enum UserActionTypes {
     LOAD_DATA = '@@user/LOAD_DATA'
 }
 
+export interface UserLoadDataState {
+    email: string;
+}
+
 export interface UserState {
     email: string,
     nick: string,

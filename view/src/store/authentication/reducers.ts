@@ -1,6 +1,6 @@
-import { AuthenticationActionTypes, AuthenticationState } from './types';
-import { Reducer } from 'redux';
-import { AuthenticationActions } from './actions';
+import {AuthenticationActionTypes, AuthenticationState} from './types';
+import {Reducer} from 'redux';
+import {AuthenticationActions} from './actions';
 
 const initialState: AuthenticationState = {
     email: '',
