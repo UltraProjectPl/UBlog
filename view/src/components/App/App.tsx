@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import { Register } from "../Authentication/Register";
 import { Security } from '../Authentication/Security';
 import { Logout } from '../Authentication/Logout';
+import { Profile } from '../User/Profile';
 import { useSelector } from '../../hooks/useSelector';
 
 export const App: React.FC = () => {
@@ -14,9 +15,10 @@ export const App: React.FC = () => {
 
     return (
         <main>
-            { isAuthenticated ? (
-                 <Route path="/logout" component={Logout} />
-            ) : (<>
+            { isAuthenticated ? (<>
+                <Route path="/profile/:nick" component={Profile} />
+                <Route path="/logout" component={Logout} />
+            </>) : (<>
                     <Route path="/register" component={Register} />
                     <Route path="/security" component={Security} />
                 </>)}
