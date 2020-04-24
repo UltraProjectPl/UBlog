@@ -1,4 +1,4 @@
-import { UserState } from './types';
+import {UserActionTypes, UserState} from './types';
 import { Reducer } from 'redux';
 import { UserActions } from './actions';
 
@@ -13,6 +13,13 @@ export const userReducer: Reducer<
     UserActions
 > = (state = initialState, action) => {
     switch (action.type) {
+        case UserActionTypes.SAVE_DATA: {
+            const payload = action.payload as UserState;
+
+            return {
+                ...payload,
+            }
+        }
         default: {
             return state
         }

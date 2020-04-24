@@ -1,11 +1,18 @@
 import * as Yup from 'yup';
 
 export enum UserActionTypes {
-    LOAD_DATA = '@@user/LOAD_DATA'
+    LOAD_DATA = '@@user/LOAD_DATA',
+    SAVE_DATA = '@@user/SAVE_DATA',
 }
 
 export interface UserLoadDataState {
     email: string;
+}
+
+export interface UserSaveDataState {
+    email: string,
+    nick: string,
+    birthDate: string|undefined
 }
 
 export interface UserState {

@@ -10,6 +10,8 @@ export const App: React.FC = () => {
     const isAuthenticated = '' !== useSelector(state => state.authentication.token);
     const user = useSelector(state => state.user);
 
+    console.log(useSelector(state => state.user));
+
     return (
         <main>
             { isAuthenticated ? (

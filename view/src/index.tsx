@@ -5,30 +5,21 @@ import { App } from './components/App/App';
 import { Router } from 'react-router-dom'
 import { Header } from './components/App/Header';
 import { createBrowserHistory } from 'history';
-import {loadToken, saveToken} from './services/LocalStorage';
 import createStore from './store/createStore';
 import * as serviceWorker from './serviceWorker';
 import './i18n';
 import './index.css';
 
-let initialState = {};
+// @ts-ignore
+const persistedState = localStorage.getItem('state') ? JSON.parse(localStorage.getItem('state')) : {};
 
-const loadTokenFromStorage = loadToken();
-if (null !== loadTokenFromStorage) {
-    initialState = {
-        authentication: {
-            token: loadTokenFromStorage
-        }
-    };
-}
-
-const store = createStore(initialState);
+const store = createStore(persistedState);
 const history = createBrowserHistory();
 
 const container = document.querySelector('#root');
 
 store.subscribe(() => {
-    saveToken(store.getState().authentication.token);
+    localStorage.setItem('state', JSON.stringify(store.getState()));
 });
 
 ReactDOM.render(

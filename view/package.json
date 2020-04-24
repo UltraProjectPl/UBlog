@@ -4,6 +4,7 @@
   "dependencies": {
     "formik": "^2.0.3",
     "i18next": "^19.0.0",
+    "joi-browser": "^13.4.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-i18next": "^11.1.0",
@@ -37,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "@types/hapi__joi": "^15.0.1",
     "@types/i18next": "^13.0.0",
     "@types/jest": "24.0.19",
     "@types/node": "12.11.1",
