@@ -7,6 +7,7 @@ import { useSelector } from '../../hooks/useSelector';
 export const Header: React.FC = () => {
     const { t } = useTranslation();
     const isAuthenticated = '' !== useSelector(state => state.authentication.token);
+    const user = useSelector(state => state.user);
 
     return (
         <header>
@@ -15,10 +16,14 @@ export const Header: React.FC = () => {
                     <li>
                         <Link to="/">UBlog</Link>
                     </li>
-                    { isAuthenticated ? (
-                        <Link to="/logout">{t('security.logout')}</Link>
-
-                    ) : (<>
+                    { isAuthenticated ? (<>
+                        <li>
+                            <Link to={`/profile/${user.nick}`}>{user.nick}</Link>
+                        </li>
+                        <li>
+                            <Link to="/logout">{t('security.logout')}</Link>
+                        </li>
+                    </>) : (<>
                         <li>
                             <Link to="/register">{t('register.sign-up')}</Link>
                         </li>

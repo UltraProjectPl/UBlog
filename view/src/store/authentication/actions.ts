@@ -1,5 +1,7 @@
 import { AuthenticationActionTypes, AuthenticationState, RegisterState, SecurityState } from './types';
 import { ActionsUnion, createAction } from '../createAction';
+import { ThunkResult } from "..";
+import {UserActions} from "../user/actions";
 
 export const AuthenticationActions = {
     authorization: (p: AuthenticationState) =>
@@ -12,6 +14,13 @@ export const AuthenticationActions = {
         createAction(AuthenticationActionTypes.REDIRECT_HOMEPAGE),
     logout: () =>
         createAction(AuthenticationActionTypes.LOGOUT),
+};
+
+export const security = (p: SecurityState): ThunkResult<void> => {
+    return async dispatch => {
+        await dispatch(AuthenticationActions.security(p));
+        await dispatch(UserActions.loadData({ email: p.email }));
+    };
 };
 
 export type AuthenticationActions = ActionsUnion<typeof AuthenticationActions>

@@ -13,9 +13,9 @@
 
         <field name="rememberMe" type="boolean" />
 
-        <field name="loginDate" type="datetime" />
+        <field name="loginDate" type="datetime_immutable" />
 
-        <field name="tokenValidTo" type="datetime" nullable="true" />
+        <field name="tokenValidTo" type="datetime_immutable" nullable="true" />
         <field name="firstLoginIp" nullable="true" />
 
         <many-to-one field="user" target-entity="App\User\Domain\User">

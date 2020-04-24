@@ -43,6 +43,7 @@ final class RegisterController
     public function index(Request $request): Response
     {
         $formHandler = $this->formHandlerFactory->createFromRequest($request, RegisterFormInterface::class);
+
         if (true === $formHandler->isSubmissionValid()) {
             /** @var RegisterDTO $dto */
             $dto = $formHandler->getData();
@@ -63,6 +64,6 @@ final class RegisterController
             ]);
         }
 
-        return $this->responseFactory->error('Failed');
+        return $this->responseFactory->error($formHandler->getErrors());
     }
 }

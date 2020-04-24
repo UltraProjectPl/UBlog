@@ -25,7 +25,9 @@ final class CreateUserHandler implements CommandHandlerInterface
     {
         $user = new User(
             $command->getEmail(),
-            $command->getPassword()
+            $command->getPassword(),
+            $command->getNick(),
+            $command->getBirthDate()
         );
 
         $this->users->add($user);

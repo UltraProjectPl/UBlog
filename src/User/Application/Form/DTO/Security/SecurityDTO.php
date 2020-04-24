@@ -5,9 +5,9 @@ namespace App\User\Application\Form\DTO\Security;
 
 final class SecurityDTO
 {
-    public string $email;
+    public ?string $email = null;
 
-    public string $password;
+    public ?string $password = null;
 
-    public bool $rememberMe;
+    public ?bool $rememberMe = null;
 }

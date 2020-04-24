@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useDispatch } from '../../hooks/useDispatch';
 import { useFormik } from 'formik';
-import { AuthenticationActions } from '../../store/authentication/actions';
-import { RegisterSchema, SecuritySchema } from '../../store/authentication/types';
+import { security } from '../../store/authentication/actions';
+import { SecuritySchema } from '../../store/authentication/types';
 import { useTranslation } from 'react-i18next';
 import {useSelector} from "../../hooks/useSelector";
 import {Redirect} from "react-router-dom";
@@ -25,7 +25,7 @@ export const Security: React.FC = () => {
         },
         validationSchema: SecuritySchema,
         onSubmit: values => {
-            dispatch(AuthenticationActions.security(values))
+            dispatch(security(values))
         }
     });
 

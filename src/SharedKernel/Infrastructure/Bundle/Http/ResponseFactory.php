@@ -9,6 +9,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ResponseFactory implements ResponseFactoryInterface
 {
+    public function data($data, int $status = Response::HTTP_OK): Response
+    {
+        return new JsonResponse([
+            'data' => $data
+        ], $status);
+    }
+
     public function authorization(string $token, int $status = Response::HTTP_OK): Response
     {
         return new JsonResponse([

@@ -9,6 +9,8 @@
             <generator strategy="NONE" />
         </id>
         <field name="email" unique="true" />
+        <field name="nick" />
+        <field name="birthDate" type="datetime_immutable" nullable="true" />
         <field name="password" />
     </entity>
 </doctrine-mapping>

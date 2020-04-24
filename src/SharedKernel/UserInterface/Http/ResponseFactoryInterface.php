@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface ResponseFactoryInterface
 {
+    public function data($data, int $status = Response::HTTP_OK): Response;
+
     public function authorization(string $token, int $status = Response::HTTP_OK): Response;
 
     public function create($data, int $status = Response::HTTP_CREATED): Response;

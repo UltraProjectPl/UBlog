@@ -1,0 +1,4 @@
+data:
+  path: /data/{email}
+  controller: App\User\UserInterface\Controller\UserDataController::index
+  methods: GET

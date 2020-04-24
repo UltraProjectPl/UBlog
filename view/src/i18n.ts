@@ -9,6 +9,8 @@ const resources = {
             },
             'email': 'Email',
             'password': 'Password',
+            'nick': 'Nick',
+            'birthDate': 'Date of birth',
             'register': {
                 'sign-up': 'Sign up',
                 'submit': 'Submit'
@@ -28,6 +30,8 @@ const resources = {
             },
             'email': 'Email',
             'password': 'Hasło',
+            'nick': 'Nick',
+            'birthDate': 'Data urodzenia',
             'register': {
                 'sign-up': 'Zarejestruj się',
                 'submit': 'Zarejestruj się za darmo!'

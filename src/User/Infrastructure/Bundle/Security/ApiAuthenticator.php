@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\Bundle\Security;
 
+use App\User\Application\Query\SessionByToken;
+use App\User\Application\Query\UserByEmail;
+use App\User\Domain\Session;
+use App\SharedKernel\Application\Bus\QueryBusInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +18,13 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
 final class ApiAuthenticator extends AbstractGuardAuthenticator
 {
+    private QueryBusInterface $queryBus;
+
+    public function __construct(QueryBusInterface $queryBus)
+    {
+        $this->queryBus = $queryBus;
+    }
+
     public function supports(Request $request): bool
     {
         return $request->headers->has('X-AUTH-TOKEN');
@@ -39,7 +50,13 @@ final class ApiAuthenticator extends AbstractGuardAuthenticator
             return null;
         }
 
-        return $userProvider->loadUserByUsername($credentials['username']);
+        /** @var Session|null $session */
+        $session = $this->queryBus->query(new SessionByToken($token));
+
+        if (null === $session) {
+            return null;
+        }
+        return $userProvider->loadUserByUsername($session->getUser()->getEmail());
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): ?Response

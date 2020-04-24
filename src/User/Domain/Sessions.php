@@ -12,4 +12,6 @@ interface Sessions
      * @return Session[]
      */
     public function findOneActiveByUserEmail(string $email): array;
+
+    public function findOneByToken(string $token): ?Session;
 }

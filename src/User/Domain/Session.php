@@ -7,7 +7,7 @@ use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-final class Session
+class Session
 {
     private UuidInterface $id;
 
@@ -21,10 +21,7 @@ final class Session
 
     private ? string$firstLoginIp;
 
-    /**
-     * @varActiveSessionByUserEmailHandler User
-     */
-    private $user;
+    private User $user;
 
     public function __construct(
         User $user,
